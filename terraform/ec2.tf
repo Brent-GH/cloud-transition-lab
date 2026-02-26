@@ -9,4 +9,8 @@ resource "aws_instance" "public_web" {
     Name    = "cloud-lab-public-ec2"
     Project = "cloud-transition-lab"
   }
+
+  lifecycle {
+    ignore_changes = [associate_public_ip_address]
+  }
 }

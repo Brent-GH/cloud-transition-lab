@@ -22,3 +22,7 @@ output "private_subnet_ids" {
   description = "Private subnet IDs (for internal resources like databases)"
   value       = [aws_subnet.private_a.id, aws_subnet.private_b.id]
 }
+output "private_instance_id" {
+  description = "EC2 instance ID (private subnet)"
+  value       = aws_instance.private_app.id
+}
