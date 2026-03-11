@@ -40,3 +40,36 @@ ingress {
     Project = "cloud-transition-lab"
   }
 }
+# =============================================================
+# RDS Security Group — Day 15
+# Allows MySQL port 3306 from EC2 instances only
+# No internet access to the database
+# =============================================================
+
+resource "aws_security_group" "rds_sg" {
+  name        = "cloud-lab-rds-sg"
+  description = "Allow MySQL from EC2 instances only"
+  vpc_id      = aws_vpc.lab_vpc.id
+
+  ingress {
+    description     = "MySQL from EC2"
+    from_port       = 3306
+    to_port         = 3306
+    protocol        = "tcp"
+    security_groups = [aws_security_group.public_web_sg.id]
+  }
+
+  egress {
+    description = "Allow all outbound"
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name      = "cloud-lab-rds-sg"
+    ManagedBy = "terraform"
+  }
+}
+
