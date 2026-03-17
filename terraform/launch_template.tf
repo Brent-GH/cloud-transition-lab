@@ -24,7 +24,7 @@ systemctl start httpd
 systemctl enable httpd
 echo "Welcome to Brent Cloud Lab Auto Scaling Server" > /var/www/html/index.html
 EOF
-)
+  )
 
   tag_specifications {
     resource_type = "instance"

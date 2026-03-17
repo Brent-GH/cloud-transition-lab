@@ -1,17 +1,17 @@
 
 resource "aws_autoscaling_group" "web_asg" {
-  name                = "cloud-lab-web-asg"
-  desired_capacity    = 0
-  min_size            = 0
-  max_size            = 2
+  name             = "cloud-lab-web-asg"
+  desired_capacity = 0
+  min_size         = 0
+  max_size         = 2
 
   vpc_zone_identifier = [
-  aws_subnet.public_a.id,
-  aws_subnet.public_b.id
-]
+    aws_subnet.public_a.id,
+    aws_subnet.public_b.id
+  ]
 
-  target_group_arns   = [aws_lb_target_group.web_tg.arn]
-  health_check_type   = "ELB"
+  target_group_arns         = [aws_lb_target_group.web_tg.arn]
+  health_check_type         = "ELB"
   health_check_grace_period = 120
 
   launch_template {
